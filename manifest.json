@@ -1,20 +1,21 @@
-{
-  "name": "Discipline App",
+﻿{
+  "name": "Discipline",
   "short_name": "Discipline",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#000000",
+  "background_color": "#0b1224",
+  "theme_color": "#0b1224",
+  "description": "Private offline habit tracker with streaks and analytics.",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "./public/icons/icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml"
     },
     {
-      "src": "icon-512.png",
+      "src": "./public/icons/icon-512.svg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml"
     }
   ]
 }

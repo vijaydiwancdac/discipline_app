@@ -1,33 +1,130 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Discipline App</title>
-  <meta name="description" content="Track your daily habits, build streaks, and stay disciplined with this simple PWA habit tracker.">
-
-  <link rel="stylesheet" href="style.css">
-
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Discipline</title>
+  <meta name="description" content="Private habit tracker with streaks, analytics, offline support." />
+  <link rel="stylesheet" href="./src/styles/main.css" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#0b1224" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="habit-icon">💪</span>
+        <div>
+          <h1>Discipline</h1>
+          <p>Build consistency with private habits and behavior insights.</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="settingsButton" class="secondary-btn">Settings</button>
+        <button id="lockButton" class="icon-btn" aria-label="Lock">🔒</button>
+      </div>
+    </header>
 
-<header>Discipline</header>
+    <main>
+      <section class="dashboard">
+        <div class="dashboard-header">
+          <div>
+            <p class="section-label">Today</p>
+            <h2>Habits</h2>
+          </div>
+          <div class="dashboard-actions">
+            <button id="addHabitButton" class="primary-btn">+ Add Habit</button>
+            <button id="analyticsToggle" class="secondary-btn">Analytics</button>
+          </div>
+        </div>
 
-<div class="container" id="habitList"></div>
+        <div id="dashboardSummary" class="dashboard-summary"></div>
+        <div id="habitList" class="habit-grid"></div>
+      </section>
 
-<button class="add-btn" onclick="openModal()">+</button>
-
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <input type="text" id="habitName" placeholder="Habit name" />
-    <button onclick="addHabit()">Add Habit</button>
+      <section id="analyticsPanel" class="analytics-panel hidden">
+        <div class="panel-header">
+          <div>
+            <p class="section-label">Insights</p>
+            <h2>Performance</h2>
+          </div>
+          <button id="closeAnalyticsBtn" class="secondary-btn">Back</button>
+        </div>
+        <div class="charts">
+          <div class="chart-card">
+            <h3>Weekly consistency</h3>
+            <canvas id="weeklyChart" height="160"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Monthly trend</h3>
+            <canvas id="monthlyChart" height="160"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-</div>
 
-<script src="app.js"></script>
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div class="modal-panel">
+      <button id="closeModal" class="close-btn" aria-label="Close">×</button>
+      <h2 id="modalTitle">Add habit</h2>
+      <form id="habitForm" class="form-row">
+        <label>
+          Habit name
+          <input id="habitName" name="name" type="text" maxlength="30" placeholder="Meditate, run, read" required />
+        </label>
+        <label>
+          Icon
+          <input id="habitIcon" name="icon" type="text" maxlength="2" placeholder="Emoji or icon" />
+        </label>
+        <label class="switch">
+          Private habit
+          <input id="habitPrivate" name="isPrivate" type="checkbox" />
+        </label>
+        <div class="form-row">
+          <button type="submit" class="primary-btn">Save habit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
+  <div id="lockScreen" class="lock-screen hidden">
+    <div class="lock-card">
+      <h2 id="lockTitle">Enter PIN</h2>
+      <p id="lockMessage">Protect private habits with a PIN.</p>
+      <form id="pinForm" class="form-row">
+        <label>
+          PIN
+          <input id="pinInput" type="password" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="8" placeholder="1234" required />
+        </label>
+        <label class="switch">
+          Setup mode
+          <input id="pinToggle" type="checkbox" />
+        </label>
+        <button id="pinSubmit" type="submit" class="primary-btn">Unlock</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="settingsPanel" class="settings-panel hidden">
+    <div class="settings-card">
+      <button id="closeSettingsBtn" class="close-btn" aria-label="Close">×</button>
+      <h2>Reminder settings</h2>
+      <div class="settings-row">
+        <label class="switch">
+          Enable daily reminders
+          <input id="remindersEnabled" type="checkbox" />
+        </label>
+        <label>
+          Reminder time
+          <input id="reminderTime" type="time" value="21:00" />
+        </label>
+        <button id="saveSettingsBtn" class="primary-btn">Save settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
 </body>
 </html>
