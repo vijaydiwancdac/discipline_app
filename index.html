@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Discipline App</title>
+  <meta name="description" content="Track your daily habits, build streaks, and stay disciplined with this simple PWA habit tracker.">
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body>
+
+<header>Discipline</header>
+
+<div class="container" id="habitList"></div>
+
+<button class="add-btn" onclick="openModal()">+</button>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <input type="text" id="habitName" placeholder="Habit name" />
+    <button onclick="addHabit()">Add Habit</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
